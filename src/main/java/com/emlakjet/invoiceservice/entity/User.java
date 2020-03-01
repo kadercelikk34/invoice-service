@@ -1,6 +1,7 @@
-package com.emlakjet.invoiceservice.model;
+package com.emlakjet.invoiceservice.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USER")
@@ -9,16 +10,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Please provide a username")
     @Column(name = "USERNAME")
     private String username;
 
+    @NotEmpty(message = "Please provide a lastname")
     @Column(name = "LASTNAME")
     private String lastname;
 
+    @NotEmpty(message = "Please provide a email")
     @Column(name = "EMAIL", unique = true)
     private String email;
 
-
+    @NotEmpty(message = "Please provide a password")
+    @Column(name = "PASSWORD")
     private String password;
 
     public Long getId() {

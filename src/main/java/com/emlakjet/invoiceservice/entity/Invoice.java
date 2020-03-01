@@ -1,8 +1,10 @@
-package com.emlakjet.invoiceservice.model;
+package com.emlakjet.invoiceservice.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "INVOICES")
@@ -11,21 +13,24 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Please provide a amount")
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
+    @NotEmpty(message = "Please provide a productName")
     @Column(name = "PRODUCT_NAME")
     private String productName;
 
     @Column(name = "BILLING_NO")
     private String billNo;
 
+    @NotEmpty(message = "Please provide a invoiceStatus")
     @Enumerated(EnumType.STRING)
     @Column(name = "INVOICE_STATUS")
     private InvoiceStatus invoiceStatus;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="USER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @Column(name = "CREATE_DATE")
