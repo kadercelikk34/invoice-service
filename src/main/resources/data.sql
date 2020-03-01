@@ -1,3 +1,4 @@
+INSERT INTO USER (ID,USERNAME,LASTNAME, EMAIL,PASSWORD) VALUES(1, 'kader', 'çelik', 'kader@gail.com','$2a$10$o3oNkdSBE8F0M.k/BJUalOF1vJQNmq1dppXklaC165uM6TqU/ieZm');
 /*INSERT INTO USER (ID,username,LASTNAME, EMAIL,password) VALUES(1, 'John', 'Doe', 'john@doe.com','secret');
 
 

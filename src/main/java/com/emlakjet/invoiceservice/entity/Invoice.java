@@ -22,7 +22,7 @@ public class Invoice {
     private String productName;
 
     @Column(name = "BILLING_NO")
-    private String billNo;
+    private String billingNo;
 
     @NotEmpty(message = "Please provide a invoiceStatus")
     @Enumerated(EnumType.STRING)
@@ -61,12 +61,12 @@ public class Invoice {
         this.productName = productName;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getBillingNo() {
+        return billingNo;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setBillingNo(String billingNo) {
+        this.billingNo = billingNo;
     }
 
     public InvoiceStatus getInvoiceStatus() {
