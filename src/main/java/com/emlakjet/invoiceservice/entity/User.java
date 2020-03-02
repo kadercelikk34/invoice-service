@@ -1,6 +1,7 @@
 package com.emlakjet.invoiceservice.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -10,15 +11,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME")
+    @NotNull
+    @Column(name = "FIRSTNAME")
+    private String firstName;
+
+    @NotNull
+    @Column(name = "LASTNAME")
+    private String lastName;
+
+    @NotNull
+    @Column(name = "USERNAME", unique = true)
     private String username;
 
-    @Column(name = "LASTNAME")
-    private String lastname;
-
-    @Column(name = "EMAIL", unique = true)
-    private String email;
-
+    @NotNull
     @Column(name = "PASSWORD")
     private String password;
 
@@ -44,20 +49,20 @@ public class User {
         this.username = username;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {

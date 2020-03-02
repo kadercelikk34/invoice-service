@@ -3,16 +3,15 @@ package com.emlakjet.invoiceservice.dto;
 import com.emlakjet.invoiceservice.entity.InvoiceStatus;
 import com.emlakjet.invoiceservice.entity.User;
 
-import java.math.BigDecimal;
-
 public class InvoiceDto {
 
     private Long id;
-    private BigDecimal amount;
+    private Long amount;
     private String productName;
-    private String billNo;
+    private String billingNo;
     private InvoiceStatus invoiceStatus;
     private User user;
+
 
     public Long getId() {
         return id;
@@ -22,11 +21,11 @@ public class InvoiceDto {
         this.id = id;
     }
 
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
@@ -38,12 +37,12 @@ public class InvoiceDto {
         this.productName = productName;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getBillingNo() {
+        return billingNo;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setBillingNo(String billingNo) {
+        this.billingNo = billingNo;
     }
 
     public InvoiceStatus getInvoiceStatus() {

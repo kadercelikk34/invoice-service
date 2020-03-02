@@ -2,19 +2,18 @@ package com.emlakjet.invoiceservice.controller;
 
 import com.emlakjet.invoiceservice.dto.InvoiceDto;
 import com.emlakjet.invoiceservice.entity.Invoice;
-import com.emlakjet.invoiceservice.entity.User;
+import com.emlakjet.invoiceservice.entity.InvoiceStatus;
 import com.emlakjet.invoiceservice.service.InvoiceService;
+import com.emlakjet.invoiceservice.validator.InvoiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.URI;
-import java.util.List;
 
 @Controller
 public class InvoiceController {
@@ -22,28 +21,64 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
+    @Autowired
+    private InvoiceValidator invoiceValidator;
+
+
     @GetMapping("/invoice")
     public String invoice(Model model) {
         model.addAttribute("invoiceForm", new Invoice());
 
-        return "invoice";
+        return "invoiceCreated";
     }
-    @PostMapping(value = "/invoice")
-    public ResponseEntity<Void> invoiceSave(@RequestBody InvoiceDto invoiceDto){
-        try{
-            invoiceService.invoiceSave(invoiceDto);
-            Long id = invoiceDto.getId();
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
-            return ResponseEntity.created(location).build();
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
+    @PostMapping("/invoiceSave")
+    public String invoiceSave(@ModelAttribute("invoiceForm") InvoiceDto invoiceForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Authentication authentication) {
+        invoiceValidator.validate(invoiceForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "invoiceCreated";
         }
 
-    }
-    @GetMapping(value = "/invoices")
-    public ResponseEntity<List<Invoice>> getInvoices(){
-        List<Invoice> invoiceList = invoiceService.getInvoice();
-        return ResponseEntity.ok(invoiceList);
+        Invoice invoice = invoiceService.invoiceSave(invoiceForm, authentication);
+
+        redirectAttributesMessage(redirectAttributes, invoice);
+        return "redirect:/invoice/" + invoice.getId();
+
 
     }
+
+    @RequestMapping(value = "/invoice/{id}", method = RequestMethod.GET)
+    public String getInvoiceDetails(@PathVariable("id") Long id, Model model) {
+
+
+        Invoice invoice = invoiceService.findById(id);
+        if (invoice == null) {
+            model.addAttribute("css", "danger");
+            model.addAttribute("msg", "User not found");
+        }
+        model.addAttribute("invoice", invoice);
+
+        return "invoiceDetails";
+
+    }
+
+    @RequestMapping(value = {"/invoicesList"}, method = RequestMethod.GET)
+    public ModelAndView getInvoiceList() {
+        ModelAndView map = new ModelAndView("invoiceList");
+        map.addObject("lists", invoiceService.getInvoiceList());
+
+        return map;
+    }
+
+    private RedirectAttributes redirectAttributesMessage(RedirectAttributes redirectAttributes, Invoice invoice) {
+        if (invoice.getInvoiceStatus().equals(InvoiceStatus.NOT_APPROWED)) {
+            redirectAttributes.addFlashAttribute("msg", invoice.getUser().getFirstName() + " " + invoice.getUser().getLastName() + " " + invoice.getId() + ". işlemi reddedilir");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            return redirectAttributes;
+        }
+        redirectAttributes.addFlashAttribute("msg", invoice.getUser().getFirstName() + " " + invoice.getUser().getLastName() + " " + invoice.getId() + ". işlemi kabul edilir");
+        redirectAttributes.addFlashAttribute("css", "success");
+        return redirectAttributes;
+    }
+
 }

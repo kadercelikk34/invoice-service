@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 //Önce bu configuration devreye girmesi için order  veriyoruz , SecurityConfiguration dan önce devreye girer
 @Configuration
-@Order(value=0)
+@Order(value = 0)
 public class H2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
