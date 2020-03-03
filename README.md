@@ -6,23 +6,23 @@ girmiş olduğu ONAYLANMIŞ tüm faturaların toplamını belirlenen limitin üz
 ONAYLANMAZ, limitin üzerine çıkarmıyorsa ONAYLANIR.
 LİMİT DEĞERİ, tüm uygulama süresince tüm satın alma uzmanları için aynıdır.
 İşlem bilgisi aşağıdaki bilgileri içerir:
-● First Name
-● Last Name
-● E-mail
-● Amount
-● Product Name
-● Bill No
+1. First Name
+2.Last Name
+3. E-mail
+4. Amount
+5. Product Name
+6.Bill No
 Örnek işlem bilgisi: "John,Doe,john@doe.com,30,USB DISC,TR000"
 Her müşteri Ad, Soyad ve E-mail üçlüsü ile tekil bir şekilde tanımlanır. Aynı Ad ve Soyad
 bilgisine sahip ama farklı email adresine sahip kişilerin işlemleri ayrı ayrı değerlendirilir.
 Senin görevin aşağıdaki isterleri karşılayacak bir web uygulaması yapmak olacak:
-● İşlem bilgisi bir form ile girilmeli
-● Yeni girilen işlem bilgisi yukarıda bahsedilen kural çalıştırılarak kabul edilmeli veya
+1. İşlem bilgisi bir form ile girilmeli
+2. Yeni girilen işlem bilgisi yukarıda bahsedilen kural çalıştırılarak kabul edilmeli veya
 reddedilmeli.
-○ İşlem sonucu kullanıcıya gösterilmeli.
-● Kabul edilen veya reddedilen tüm işlemler listelenmeli.
-○ İşlem listesi kabul durumuna göre filtrelenmeli.
-○ Seçilen müşteriye ait işlemler listelenmeli.
+  - İşlem sonucu kullanıcıya gösterilmeli.
+4. Kabul edilen veya reddedilen tüm işlemler listelenmeli.
+  -İşlem listesi kabul durumuna göre filtrelenmeli.
+  -Seçilen müşteriye ait işlemler listelenmeli.
 
 Örnekler
 -------------
