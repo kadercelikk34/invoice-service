@@ -1,6 +1,6 @@
 package com.emlakjet.invoiceservice.entity;
 
 public enum InvoiceStatus {
-    APPROVED,
-    NOT_APPROWED
+    APPROVED, //ONAYLANDI
+    NOT_APPROWED //ONAYLANMADI
 }

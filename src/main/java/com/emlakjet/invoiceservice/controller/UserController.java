@@ -32,7 +32,7 @@ public class UserController {
 
         return "registration";
     }
-
+    //Hesap oluşturulur
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
@@ -58,7 +58,7 @@ public class UserController {
 
         return "login";
     }
-
+    //login oldukdan sonra Tüm Faturaların Listelendiği dashboard ekranı
     @GetMapping(value = {"/", "/dashboard"})
     public ModelAndView welcome(Model model) {
         ModelAndView map = new ModelAndView("dashboard");

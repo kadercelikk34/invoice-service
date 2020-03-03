@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -31,7 +30,7 @@ public class InvoiceController {
 
         return "invoiceCreated";
     }
-
+    //Yeni Fatura oluşturmak için yazıldı.
     @PostMapping("/invoiceSave")
     public String invoiceSave(@ModelAttribute("invoiceForm") InvoiceDto invoiceForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Authentication authentication) {
         invoiceValidator.validate(invoiceForm, bindingResult);
@@ -46,7 +45,7 @@ public class InvoiceController {
 
 
     }
-
+    //id si verilen faturaya ait detaylatı getirir
     @GetMapping(value = "/invoice/{id}")
     public String getInvoiceDetails(@PathVariable("id") Long id, Model model) {
 
@@ -61,15 +60,7 @@ public class InvoiceController {
         return "invoiceDetails";
 
     }
-
-    @GetMapping(value = {"/invoicesList"})
-    public ModelAndView getInvoiceList() {
-        ModelAndView map = new ModelAndView("invoiceList");
-        map.addObject("lists", invoiceService.getInvoiceList());
-
-        return map;
-    }
-
+    //Reddedilmiş ve Onaylanmış fatura için css ve mesaj
     private RedirectAttributes redirectAttributesMessage(RedirectAttributes redirectAttributes, Invoice invoice) {
         if (invoice.getInvoiceStatus().equals(InvoiceStatus.NOT_APPROWED)) {
             redirectAttributes.addFlashAttribute("msg", invoice.getUser().getFirstName() + " " + invoice.getUser().getLastName() + " " + invoice.getId() + ". işlemi reddedilir");

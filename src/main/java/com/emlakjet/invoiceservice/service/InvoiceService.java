@@ -46,13 +46,13 @@ public class InvoiceService {
 
         return optionalSupplier.orElse(null);
     }
-
+    //authentication üzerinden user bilgisi alınır
     private User getUser(Authentication authentication) {
         UserDetails userDetail = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userDetail.getUsername());
         return user;
     }
-
+    //Limit Değerine göre kullanıcının yeni girdiği faturanın statusu (APPROVED, NOT_APPROWED) belirlenir
     private InvoiceStatus getInvoiceStatus(Long userId, Long amount) {
         Long totalAmount = invoiceRepository.getAmounts(userId);
         Long creditLimit = i̇nvoiceServiceProperties.getCreditLimit();

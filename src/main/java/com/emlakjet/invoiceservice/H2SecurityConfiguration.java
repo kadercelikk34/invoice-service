@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 //Önce bu configuration devreye girmesi için order  veriyoruz , SecurityConfiguration dan önce devreye girer
+//h2-console login olmadan giriş yapabilmek için
 @Configuration
 @Order(value = 0)
 public class H2SecurityConfiguration extends WebSecurityConfigurerAdapter {

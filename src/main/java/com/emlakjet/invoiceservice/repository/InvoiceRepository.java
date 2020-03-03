@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
-
+    //id si verilen usera ait onaylanmış (APPROVED) fatura toplamı
     @Query("SELECT sum(amount) FROM Invoice invoice WHERE invoice.user.id = 1 and invoice.invoiceStatus='APPROVED'")
     Long getAmounts(@Param("userId") Long userId);
 }

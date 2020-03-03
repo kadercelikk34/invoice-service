@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    //spring-securty dependecy olarak eklendikden sonra projemiz için custimize ediyorz
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
