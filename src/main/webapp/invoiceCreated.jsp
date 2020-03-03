@@ -22,7 +22,7 @@
         <h2 class="form-signin-heading">Yeni Fatura Oluştur</h2>
         <spring:bind path="amount">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="amount" class="form-control" placeholder="Fatura Tutarı"
+                <form:input type="number" path="amount" class="form-control" placeholder="Fatura Tutarı"
                             autofocus="true"></form:input>
                 <form:errors path="amount"></form:errors>
             </div>
