@@ -1,4 +1,4 @@
-# İnvoice Service (Satın Alma Onaylama)
+# İnvoice Service (Satın Alma Fatura Girişi)
 ===================
 
 Kural: Muhasebe sistemine girilecek yeni fatura bilgisi, o satın alım uzmanının şu ana kadar
