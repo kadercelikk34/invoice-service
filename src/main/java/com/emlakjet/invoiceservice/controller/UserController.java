@@ -59,8 +59,7 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = {"/", "/dashboard"}, method = RequestMethod.GET)
-
+    @GetMapping(value = {"/", "/dashboard"})
     public ModelAndView welcome(Model model) {
         ModelAndView map = new ModelAndView("dashboard");
         map.addObject("lists", invoiceService.getInvoiceList());

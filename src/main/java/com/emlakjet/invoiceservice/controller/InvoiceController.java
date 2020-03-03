@@ -47,7 +47,7 @@ public class InvoiceController {
 
     }
 
-    @RequestMapping(value = "/invoice/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/invoice/{id}")
     public String getInvoiceDetails(@PathVariable("id") Long id, Model model) {
 
 
@@ -62,7 +62,7 @@ public class InvoiceController {
 
     }
 
-    @RequestMapping(value = {"/invoicesList"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/invoicesList"})
     public ModelAndView getInvoiceList() {
         ModelAndView map = new ModelAndView("invoiceList");
         map.addObject("lists", invoiceService.getInvoiceList());
